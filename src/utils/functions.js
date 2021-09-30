@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import { orderAttributes } from './attributes'
 
 export const collectBrowserInfo = () => {
   const screenWidth = window && window.screen ? window.screen.width : ''
@@ -72,3 +73,24 @@ export const clearPaymentScripts = () => {
     el.parentNode.removeChild(el)
   })
 }
+
+// used to get ip by calling remote server
+export const getJSONP = (url, success) => {
+  let ud = '_' + +new Date()
+  let script = document.createElement('script')
+  let head = document.getElementsByTagName('head')[ 0 ] || document.documentElement
+
+  window[ ud ] = function (data) {
+    head.removeChild(script)
+    success && success(data)
+  }
+
+  script.src = url.replace('callback=?', 'callback=' + ud)
+  head.appendChild(script)
+  console.log(orderAttributes)
+}
+
+// retrieve client IP by calling jsonip.com service
+export const getClientIP = () => getJSONP('http://jsonip.com/?callback=?', (data) => data.hasOwnProperty('ip') ? data.ip : 'unknown')
+
+export const sendPurchaseEventToFacebookAPI = () => {}

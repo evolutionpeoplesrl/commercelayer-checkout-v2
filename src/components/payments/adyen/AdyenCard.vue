@@ -18,6 +18,7 @@
 <script>
 import { paymentMixin } from '@/mixins/paymentMixin'
 import { collectBrowserInfo } from '@/utils/functions'
+import { getClientIP } from '../../../utils/functions'
 
 export default {
   computed: {
@@ -70,6 +71,8 @@ export default {
         btn.onclick = () => {
           this.handlePayment(checkout)
         }
+
+        console.log(getClientIP())
       })
     },
     handleOnChange (state, component) {
