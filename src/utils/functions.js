@@ -86,7 +86,6 @@ export const getJSONP = (url, success) => {
 
   script.src = url.replace('callback=?', 'callback=' + ud)
   head.appendChild(script)
-  console.log(this.state.data)
 }
 
 // retrieve client IP by calling jsonip.com service

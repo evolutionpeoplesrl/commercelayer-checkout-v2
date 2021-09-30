@@ -79,6 +79,8 @@ export default {
       if (state.isValid) {
         let browserInfo = collectBrowserInfo()
 
+        console.log(state.data)
+
         this.$store.dispatch('updateOrderPaymentSource', {
           payment_request_data: {
             payment_method: state.data.paymentMethod,
