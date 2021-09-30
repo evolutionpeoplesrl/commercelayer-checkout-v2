@@ -18,7 +18,7 @@
 <script>
 import { paymentMixin } from '@/mixins/paymentMixin'
 import { collectBrowserInfo } from '@/utils/functions'
-import { getClientIP } from '../../../utils/functions'
+import { sendPurchaseEventToFacebookAPI } from '../../../utils/functions'
 
 export default {
   computed: {
@@ -72,14 +72,12 @@ export default {
           this.handlePayment(checkout)
         }
 
-        getClientIP().then(result => console.log(result))
+        sendPurchaseEventToFacebookAPI()
       })
     },
     handleOnChange (state, component) {
       if (state.isValid) {
         let browserInfo = collectBrowserInfo()
-
-        console.log(state.data)
 
         this.$store.dispatch('updateOrderPaymentSource', {
           payment_request_data: {

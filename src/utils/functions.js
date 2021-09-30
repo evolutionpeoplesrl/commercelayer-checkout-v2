@@ -90,12 +90,13 @@ export const getJSONP = (url, success) => {
 
 // retrieve client IP by calling jsonip.com service
 export const getClientIP = () => {
-  return new Promise((resolve, reject) => {
-    getJSONP('https://jsonip.com/?callback=?', (data) => {
-      console.log(data, data.ip)
-      resolve(data.hasOwnProperty('ip') ? data.ip : 'unknown')
-    })
-  })
+  return new Promise((resolve, reject) => getJSONP('https://jsonip.com/?callback=?', data => resolve(data.hasOwnProperty('ip') ? data.ip : 'unknown')))
 }
 
-export const sendPurchaseEventToFacebookAPI = () => {}
+export const sendPurchaseEventToFacebookAPI = () => {
+  getClientIP().then(result => {
+    const ip = result
+    const orderAmount = Number(document.getElementById('order-summary-total-amount').textContent.replace(/[^0-9,-]+/g, '').replace(',', '.'))
+    console.log(ip, window.navigator.userAgent, orderAmount)
+  })
+}
