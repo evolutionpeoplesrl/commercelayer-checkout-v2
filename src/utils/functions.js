@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import axios from 'axios'
 
 export const collectBrowserInfo = () => {
   const screenWidth = window && window.screen ? window.screen.width : ''
@@ -99,7 +98,11 @@ export const sendPurchaseEventToFacebookAPI = () => {
   getClientIP().then(result => {
     const ip = result
     const orderAmount = Number(document.getElementById('order-summary-total-amount').textContent.replace(/[^0-9,-]+/g, '').replace(',', '.'))
-    const data = JSON.stringify({
+
+    let myHeaders = new Headers()
+    myHeaders.append('Content-Type', 'application/json')
+
+    const raw = JSON.stringify({
       'data': [
         {
           'event_name': 'Purchase',
@@ -118,21 +121,16 @@ export const sendPurchaseEventToFacebookAPI = () => {
       ]
     })
 
-    const config = {
-      method: 'post',
-      url: 'https://graph.facebook.com/v12.0/369407189935534/events?access_token=EAAVny3PwrEYBAFFMIzXttidrcK1tF2Df05uwTbJdRmSR3Ost9fSIjNjZByJmBH8FgbsfMYLOLVkZASuzhZBSbVwSCOSZCFi78m123WuNJuTitVRGlmm4ZAh2GZCNrT0baKivfO32oIRQxzj9e9fIaEvsEvKDM5UsVd5MaFsJXr3N4ooMMrSZC3ZC8hXrnW8RbgQZD',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: data
+    const requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
     }
 
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data))
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
+    fetch('https://graph.facebook.com/v12.0/369407189935534/events?access_token=EAAVny3PwrEYBAFFMIzXttidrcK1tF2Df05uwTbJdRmSR3Ost9fSIjNjZByJmBH8FgbsfMYLOLVkZASuzhZBSbVwSCOSZCFi78m123WuNJuTitVRGlmm4ZAh2GZCNrT0baKivfO32oIRQxzj9e9fIaEvsEvKDM5UsVd5MaFsJXr3N4ooMMrSZC3ZC8hXrnW8RbgQZD', requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error))
   })
 }
