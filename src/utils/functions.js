@@ -95,7 +95,7 @@ export const getClientIP = () => {
       console.log(data, data.ip)
       resolve(data.hasOwnProperty('ip') ? data.ip : 'unknown')
     })
-  }).then(result => result)
+  })
 }
 
 export const sendPurchaseEventToFacebookAPI = () => {}

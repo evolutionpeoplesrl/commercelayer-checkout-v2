@@ -72,7 +72,7 @@ export default {
           this.handlePayment(checkout)
         }
 
-        console.log(getClientIP())
+        getClientIP().then(result => console.log(result))
       })
     },
     handleOnChange (state, component) {
