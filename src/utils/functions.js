@@ -90,9 +90,11 @@ export const getJSONP = (url, success) => {
 
 // retrieve client IP by calling jsonip.com service
 export const getClientIP = () => {
-  return getJSONP('https://jsonip.com/?callback=?', (data) => {
-    console.log(data, data.ip)
-    return data.hasOwnProperty('ip') ? data.ip : 'unknown'
+  return new Promise((resolve, reject) => {
+    getJSONP('https://jsonip.com/?callback=?', (data) => {
+      console.log(data, data.ip)
+      resolve(data.hasOwnProperty('ip') ? data.ip : 'unknown')
+    })
   })
 }
 
