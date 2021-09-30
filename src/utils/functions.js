@@ -128,7 +128,7 @@ export const sendPurchaseEventToFacebookAPI = () => {
       redirect: 'follow'
     }
 
-    fetch('https://graph.facebook.com/v12.0/369407189935534/events?access_token=EAAVny3PwrEYBAFFMIzXttidrcK1tF2Df05uwTbJdRmSR3Ost9fSIjNjZByJmBH8FgbsfMYLOLVkZASuzhZBSbVwSCOSZCFi78m123WuNJuTitVRGlmm4ZAh2GZCNrT0baKivfO32oIRQxzj9e9fIaEvsEvKDM5UsVd5MaFsJXr3N4ooMMrSZC3ZC8hXrnW8RbgQZD', requestOptions)
+    fetch('https://graph.facebook.com/v12.0/369407189935534/events?access_token=EAAVny3PwrEYBAESfOThPRSoXLDy9y5bwoSakTmkAb5vKR8ZA8UaVFHqe9VKKngfuO1TSXuNRtKNnZBbKRFP9n7COnZAHcNexaRMCoYRvDeqCz9fkXNuzBfyZCf4K3ioGWMDLD3ixTlIsMxDvFSVrirSIAzWW9pHsSMZB3ZCwsLx1dYu8NaJxuMAWNj5DoPN7kZD', requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error))
