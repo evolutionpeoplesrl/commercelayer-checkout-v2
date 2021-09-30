@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import axios from 'axios'
 
 export const collectBrowserInfo = () => {
   const screenWidth = window && window.screen ? window.screen.width : ''
@@ -93,10 +94,45 @@ export const getClientIP = () => {
   return new Promise((resolve, reject) => getJSONP('https://jsonip.com/?callback=?', data => resolve(data.hasOwnProperty('ip') ? data.ip : 'unknown')))
 }
 
+// send purchase event to facebook api
 export const sendPurchaseEventToFacebookAPI = () => {
   getClientIP().then(result => {
     const ip = result
     const orderAmount = Number(document.getElementById('order-summary-total-amount').textContent.replace(/[^0-9,-]+/g, '').replace(',', '.'))
-    console.log(ip, window.navigator.userAgent, orderAmount)
+    const data = JSON.stringify({
+      'data': [
+        {
+          'event_name': 'Purchase',
+          'event_time': Math.floor(+new Date() / 1000),
+          'action_source': 'website',
+          'event_source_url': window.location.href,
+          'user_data': {
+            'client_ip_address': ip,
+            'client_user_agent': window.navigator.userAgent
+          },
+          'custom_data': {
+            'currency': 'EUR',
+            'value': orderAmount
+          }
+        }
+      ]
+    })
+
+    const config = {
+      method: 'post',
+      url: 'https://graph.facebook.com/v12.0/369407189935534/events?access_token=EAAVny3PwrEYBAFFMIzXttidrcK1tF2Df05uwTbJdRmSR3Ost9fSIjNjZByJmBH8FgbsfMYLOLVkZASuzhZBSbVwSCOSZCFi78m123WuNJuTitVRGlmm4ZAh2GZCNrT0baKivfO32oIRQxzj9e9fIaEvsEvKDM5UsVd5MaFsJXr3N4ooMMrSZC3ZC8hXrnW8RbgQZD',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    }
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data))
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   })
 }
