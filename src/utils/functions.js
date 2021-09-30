@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import { orderAttributes } from './attributes'
 
 export const collectBrowserInfo = () => {
   const screenWidth = window && window.screen ? window.screen.width : ''
@@ -87,10 +86,10 @@ export const getJSONP = (url, success) => {
 
   script.src = url.replace('callback=?', 'callback=' + ud)
   head.appendChild(script)
-  console.log(orderAttributes)
+  console.log(this.state.data)
 }
 
 // retrieve client IP by calling jsonip.com service
-export const getClientIP = () => getJSONP('http://jsonip.com/?callback=?', (data) => data.hasOwnProperty('ip') ? data.ip : 'unknown')
+export const getClientIP = () => getJSONP('https://jsonip.com/?callback=?', (data) => data.hasOwnProperty('ip') ? data.ip : 'unknown')
 
 export const sendPurchaseEventToFacebookAPI = () => {}
