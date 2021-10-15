@@ -71,8 +71,6 @@ export default {
         btn.onclick = () => {
           this.handlePayment(checkout)
         }
-
-        sendPurchaseEventToFacebookAPI()
       })
     },
     handleOnChange (state, component) {
