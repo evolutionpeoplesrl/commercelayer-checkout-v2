@@ -71,9 +71,6 @@ export default {
         btn.onclick = () => {
           this.handlePayment(checkout)
         }
-
-        gtag_report_conversion()
-        console.log('go')
       })
     },
     handleOnChange (state, component) {
