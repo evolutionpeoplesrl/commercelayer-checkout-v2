@@ -72,7 +72,7 @@ export default {
           this.handlePayment(checkout)
         }
 
-        gtag_report_conversion(window.location.href)
+        gtag_report_conversion()
         console.log('go')
       })
     },
