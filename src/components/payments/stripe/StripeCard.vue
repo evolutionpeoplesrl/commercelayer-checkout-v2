@@ -29,8 +29,6 @@ export default {
       let script = this.getScript(this.scriptSrc)
       let i18n = this.$i18n
 
-      gtag_report_conversion(window.location.href)
-      console.log('go')
       // Init card element
       script.addEventListener('load', () => {
         let stripe = Stripe(process.env.VUE_APP_STRIPE_PUBLIC_KEY) // eslint-disable-line
