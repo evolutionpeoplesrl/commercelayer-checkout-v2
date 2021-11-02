@@ -78,6 +78,8 @@ export default {
     submit () {
       if (this.requires_payment) {
         this.nextStep()
+        gtag_report_conversion(window.location.href)
+        console.log('go')
       } else {
         this.$store.dispatch('placeOrder')
       }
