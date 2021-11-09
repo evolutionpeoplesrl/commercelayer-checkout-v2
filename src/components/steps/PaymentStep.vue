@@ -124,7 +124,7 @@ export default {
   },
   methods: {
     submit () {
-      gtag_report_conversion()
+      // gtag_report_conversion()
     }
   }
 }

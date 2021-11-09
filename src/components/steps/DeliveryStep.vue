@@ -80,7 +80,7 @@ export default {
         this.nextStep()
       } else {
         this.$store.dispatch('placeOrder')
-        gtag_report_conversion()
+        // gtag_report_conversion()
       }
     }
   }
