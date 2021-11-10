@@ -18,15 +18,15 @@
 <script>
 import { paymentMixin } from '@/mixins/paymentMixin'
 import { collectBrowserInfo } from '@/utils/functions'
-import { sendPurchaseEventToFacebookAPI } from '../../../utils/functions'
+// import { sendPurchaseEventToFacebookAPI } from '../../../utils/functions'
 
 export default {
   computed: {
     scriptSrc () {
-      return `https://checkoutshopper-${process.env.VUE_APP_ADYEN_ENV}.adyen.com/checkoutshopper/sdk/3.23.0/adyen.js`
+      return `https://checkoutshopper-${process.env.VUE_APP_ADYEN_ENV}.adyen.com/checkoutshopper/sdk/5.0.0/adyen.js`
     },
     styleHref () {
-      return `https://checkoutshopper-${process.env.VUE_APP_ADYEN_ENV}.adyen.com/checkoutshopper/sdk/3.23.0/adyen.css`
+      return `https://checkoutshopper-${process.env.VUE_APP_ADYEN_ENV}.adyen.com/checkoutshopper/sdk/5.0.0/adyen.css`
     },
     styleObj () {
       return {
