@@ -121,9 +121,18 @@ export default {
     },
     handlePaymentResponse (paymentResponse, checkout) {
       console.log(paymentResponse, paymentResponse.action, paymentResponse.resultCode)
+      const threeDSConfiguration = {
+        challengeWindowSize: '05'
+        // Set to any of the following:
+        // '02': ['390px', '400px'] -  The default window size
+        // '01': ['250px', '400px']
+        // '03': ['500px', '600px']
+        // '04': ['600px', '400px']
+        // '05': ['100%', '100%']
+      }
       if (paymentResponse.action !== undefined) {
         // https://docs.adyen.com/checkout/components-web#step-4-additional-front-end
-        checkout.createFromAction(paymentResponse.action).mount('#adyen-action')
+        checkout.createFromAction(paymentResponse.action, threeDSConfiguration).mount('#adyen-action')
       } else {
         // https://docs.adyen.com/checkout/components-web#step-6-present-payment-result
         switch (paymentResponse.resultCode) {
@@ -137,6 +146,9 @@ export default {
             let cardError = document.getElementById('adyen-card-error')
             cardError.innerHTML = this.$t('errors.not_authorized')
             this.loading_payment = false
+            break
+          case 'challengeShopper':
+            checkout.createFromAction(paymentResponse.action, threeDSConfiguration).mount('#adyen-action')
             break
         }
       }
