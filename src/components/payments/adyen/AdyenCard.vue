@@ -54,9 +54,9 @@ export default {
   methods: {
     setupPayment () {
       let script = this.getScript(this.scriptSrc)
-      script.addEventListener('load', () => {
+      script.addEventListener('load', async () => {
         // eslint-disable-next-line
-        let checkout = new AdyenCheckout(this.checkoutConfig)
+        let checkout = await AdyenCheckout(this.checkoutConfig)
 
         checkout
           .create('card', {
