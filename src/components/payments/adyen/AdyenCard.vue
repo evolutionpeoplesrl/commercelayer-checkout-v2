@@ -120,7 +120,7 @@ export default {
         })
     },
     handlePaymentResponse (paymentResponse, checkout) {
-      console.log(paymentResponse, checkout)
+      console.log(paymentResponse, paymentResponse.action, paymentResponse.resultCode)
       if (paymentResponse.action !== undefined) {
         // https://docs.adyen.com/checkout/components-web#step-4-additional-front-end
         checkout.createFromAction(paymentResponse.action).mount('#adyen-action')
