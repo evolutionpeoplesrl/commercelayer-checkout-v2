@@ -147,7 +147,8 @@ export default {
             cardError.innerHTML = this.$t('errors.not_authorized')
             this.loading_payment = false
             break
-          case 'challengeShopper':
+          case 'ChallengeShopper':
+          case 'RedirectShopper':
             checkout.createFromAction(paymentResponse.action, threeDSConfiguration).mount('#adyen-action')
             break
         }
