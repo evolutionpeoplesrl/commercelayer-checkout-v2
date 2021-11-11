@@ -23,10 +23,10 @@ import { collectBrowserInfo } from '@/utils/functions'
 export default {
   computed: {
     scriptSrc () {
-      return `https://checkoutshopper-${process.env.VUE_APP_ADYEN_ENV}.adyen.com/checkoutshopper/sdk/3.23.0/adyen.js`
+      return `https://checkoutshopper-${process.env.VUE_APP_ADYEN_ENV}.adyen.com/checkoutshopper/sdk/5.0.0/adyen.js`
     },
     styleHref () {
-      return `https://checkoutshopper-${process.env.VUE_APP_ADYEN_ENV}.adyen.com/checkoutshopper/sdk/3.23.0/adyen.css`
+      return `https://checkoutshopper-${process.env.VUE_APP_ADYEN_ENV}.adyen.com/checkoutshopper/sdk/5.0.0/adyen.css`
     },
     styleObj () {
       return {
@@ -43,7 +43,7 @@ export default {
       return {
         locale: this.$i18n.locale,
         environment: process.env.VUE_APP_ADYEN_ENV,
-        originKey: process.env.VUE_APP_ADYEN_ORIGIN_KEY,
+        clientKey: process.env.VUE_APP_ADYEN_ORIGIN_KEY,
         paymentMethodsResponse: this.order.payment_source.payment_methods,
         onChange: this.handleOnChange,
         onAdditionalDetails: this.handleOnAdditionalDetails
